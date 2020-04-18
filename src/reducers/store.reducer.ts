@@ -5,17 +5,17 @@ const INITIAL_STATE = {
     loading: false,
     fetched: false,
     store: null,
-}
+};
 
-export const storeReducer = ({state = INITIAL_STATE, action}) => {
+export const storeReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case FETCH_STORE + '_ERROR':
-            return {...INITIAL_STATE, error: true, loading: false, fetched: false};
+            return {...state, error: true, loading: false, fetched: false};
         case FETCH_STORE + '_LOADING':
-            return {...INITIAL_STATE, error: false, loading: true, fetched: false};
+            return {...state, error: false, loading: true, fetched: false};
         case FETCH_STORE + '_FULFILLED':
-            return {...INITIAL_STATE, store: action.payload.data}
+            return {...state, store: action.payload.data};
         default:
-            return INITIAL_STATE;
+            return state;
     }
 };
