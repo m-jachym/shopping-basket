@@ -5,39 +5,63 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { AddToBasketAction } from "../actions/store.action";
 import { useDispatch, useSelector } from "react-redux";
 
-const BasketItem = ({ data }) => {
-  const basket = useSelector((state) => state.store.basket);
+const BasketItem = ({ data }: any) => {
+  const basket = useSelector((state: any) => state.store.basket);
   const dispatch = useDispatch();
 
-  const _addToBasket = (data) => {
+  const _addToBasket = (data:any) => {
     dispatch(AddToBasketAction(data));
-    console.log(basket);
   };
 
   return (
     <Wrapper>
-      <View>
-        <Text>{data.name}</Text>
-        <Text>{data.price}</Text>
-      </View>
-      <TouchableOpacity onPress={() => _addToBasket(data)} style={{padding: 10, backgroundColor: 'yellow', borderRadius: 10}}>
-        <Text>usuń z koszyka</Text>
-      </TouchableOpacity>
+      <TextWrapper>
+        <ItemName>{data.name}</ItemName>
+        <ItemPrice>price: {data.price} $</ItemPrice>
+      </TextWrapper>
+      <Remove onPress={() => _addToBasket(data)}>
+        <RemoveText>Remove</RemoveText>
+      </Remove>
     </Wrapper>
   );
 };
 
 export default BasketItem;
 
+const RemoveText = styled(Text)`
+  color: ${({theme}) => theme.colors.white};
+  font-weight: bold;
+`;
+
+const Remove = styled(TouchableOpacity)`
+  padding: 10px;
+  background-color: ${({theme}) => theme.colors.lightOrange};
+  border-radius: 10px;
+`;
+
+const TextWrapper = styled(View)`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+const ItemName = styled(Text)`
+  color: ${({theme}) => theme.colors.white};
+  font-weight: bold;
+  font-size: 16px;
+`;
+const ItemPrice = styled(Text)`
+  color: ${({theme}) => theme.colors.white};
+  font-size: 12px;
+  margin-top: 3px;
+`;
 const Wrapper = styled(TouchableOpacity)`
-  margin: 5px 5px;
-  height: 100px;
-  width: 95%;
-  background-color: white;
-  border: 2px solid blue;
-  border-radius: 15px;
+  width: 100%;
+  background-color: ${({theme}) => theme.colors.darkBlue};
+  border-radius: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  margin: 5px 0;
+  padding: 20px 22px;
 `;

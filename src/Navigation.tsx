@@ -32,11 +32,11 @@ const TabNavigator = () => {
             activeTintColor: 'white',
             showIcon: true,
             showLabel: true,
-            labelStyle: {color: '#191C63', fontSize: 12, textTransform: 'lowercase', fontWeight: 'bold', marginTop: 8},
+            labelStyle: {color: '#2B3A67', fontSize: 12, textTransform: 'lowercase', fontWeight: 'bold', marginTop: 8},
             style: {height: 80, width: screenWidth, borderColor: 'transparent', borderTopColor: '#EFEFF4'},
             tabStyle: {position: 'relative'},
             indicatorStyle: {
-                backgroundColor: '#191C63',
+                backgroundColor: '#2B3A67',
                 height: 43,
                 width: 43,
                 top: 6,
