@@ -1,26 +1,28 @@
-import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
-import axios from 'axios';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { View, Text, ScrollView } from "react-native";
+import { fetchStoreAction } from "../actions/store.action";
+import StoreItem from "../components/StoreItem";
 
 const Store = () => {
+  const DATA = useSelector((state) => state.store.store);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    _fetchData();
+  }, []);
 
-    useEffect(() => {
-        test();
-    },[]);
-
-    const test = async () => {
-        let res = await axios.get('https://www.reasonapps.pl/data.json');
-
-        let data = res.data;
-        console.log(data);
-    };
-    return (
-        <View>
-            <Text>
-                elos Store
-            </Text>
-        </View>
-    )
-}
+  const _fetchData = async () => {
+    dispatch(fetchStoreAction());
+  };
+  console.log(DATA);
+  return (
+    <ScrollView>
+      {DATA &&
+        DATA.map((data) => (
+          <StoreItem key={data.id} data={data}/>
+        ))}
+    </ScrollView>
+  );
+};
 
 export default Store;
